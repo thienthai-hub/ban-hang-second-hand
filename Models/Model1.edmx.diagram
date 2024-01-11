@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c1233749951a40319a24db8733a25660" Name="Diagram1">
+        <EntityTypeShape EntityType="WebBangHangDemoModel.tb_Adv" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBangHangDemoModel.tb_Category" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBangHangDemoModel.tb_Contact" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBangHangDemoModel.tb_New" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBangHangDemoModel.tb_Order" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBangHangDemoModel.tb_OrederDetail" Width="1.5" PointX="8" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBangHangDemoModel.tb_Post" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBangHangDemoModel.tb_Product" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBangHangDemoModel.tb_ProductCategory" Width="1.5" PointX="5.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBangHangDemoModel.tb_Subscribe" Width="1.5" PointX="7.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBangHangDemoModel.tb_SystemSetting" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="WebBangHangDemoModel.FK_tb_New_tb_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBangHangDemoModel.FK_tb_Post_tb_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBangHangDemoModel.FK_tb_OrederDetail_tb_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBangHangDemoModel.FK_tb_Product_tb_ProductCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBangHangDemoModel.FK_tb_OrederDetail_tb_Product" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

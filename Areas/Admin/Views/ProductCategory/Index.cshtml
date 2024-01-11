@@ -1,0 +1,179 @@
+﻿@model IEnumerable<BanHangOnline.Models.tb_ProductCategory>
+@{
+    ViewBag.Title = "Danh mục sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section navHeader {
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="~/admin/Home" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="~/admin/category" class="nav-link">Danh mục</a>
+        </li>
+    </ul>
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý danh mục</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Danh mục</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Danh sách danh mục sản phẩm</h3>
+            <div class="card-tools">
+                <a href="~/admin/ProductCategory/add" class="btn btn-primary">Thêm mới</a>
+                <a href="#" class="btn btn-danger" id="deleteAllSelected">Delete All</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên danh mục</th>
+                        <th>Mô Tả</th>
+                        <th>Icon</th>
+                        <th>Ngày Tạo</th>
+                        <th><input type="checkbox" id="DeleteAll" /></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        int count = 1; // Khởi tạo biến đếm
+                        foreach (var item in Model)
+                        {
+                            <tr id="row_@item.Id">
+                                <td>@count</td> <!-- Hiển thị số thứ tự -->
+                                <td>@item.Title</td>
+                                <td>@item.Description</td>
+                                <td><img src="@item.Icon" width="50" /></td>
+                                <td>@item.CreatedDate</td>
+                                <td><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
+                                <td>
+                                    <a href="~/admin/ProductCategory/edit/@item.Id" class="btn btn-primary">Sữa</a>
+                                    <a href="#" data-id="@item.Id" class="btn btn-danger btnDelete">Xóa</a>
+                                </td>
+
+                            </tr>
+                            count++; // Tăng biến đếm
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">Không có bản ghi nào</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+@section Scripts{
+    <!-- Đảm bảo bạn đã thêm thư viện jQuery vào trang HTML của mình -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".btnDelete").click(function (e) {
+                e.preventDefault();
+
+                var id = $(this).data("id");
+                var rowId = "#row_" + id;
+                var url = '/admin/productCategory/Delete/' + id;
+
+                if (confirm("Bạn có chắc muốn xóa không?")) {
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        success: function (response) {
+                            if (response.success) {
+                                $(rowId).remove(); // Xóa dòng khỏi giao diện
+                            } else {
+                                alert(response.message); // Hiển thị thông báo lỗi
+                            }
+                        },
+                        error: function () {
+                            alert("Có lỗi xảy ra trong quá trình xóa");
+                        }
+                    });
+                }
+            });
+        });
+
+        //detele All
+        $(document).ready(function () {
+            $('#DeleteAll').click(function () {
+                var isChecked = $(this).is(':checked');
+                $('.cbkItem').prop('checked', isChecked);
+            });
+        });
+
+        $(document).ready(function () {
+            $('#deleteAllSelected').click(function (event) {
+                event.preventDefault();
+                var selectedIds = $('.cbkItem:checked').map(function () {
+                    return $(this).val();
+                }).get();
+
+                if (selectedIds.length === 0) {
+                    alert('Vui lòng chọn ít nhất một mục để xóa.');
+                    return;
+                }
+
+                var isConfirmed = confirm('Bạn có chắc muốn xóa không?');
+                if (isConfirmed) {
+                    // Gửi yêu cầu xóa tới server
+                    // Cách thực hiện phụ thuộc vào cách backend của bạn được cấu hình
+                    // Ví dụ: sử dụng AJAX để gửi yêu cầu xóa
+                    $.ajax({
+                        url: '/ProductCategory/DeleteSelectedItems', // Thay đổi URL theo đường dẫn thực tế
+                        type: 'POST',
+                        data: JSON.stringify({ ids: selectedIds }),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.success) {
+                                // Xóa các dòng đã chọn từ giao diện
+                                $('.cbkItem:checked').closest('tr').remove();
+
+                                alert(response.message);
+                            } else {
+                                alert(response.message); // Hiển thị thông báo lỗi
+                            }
+                        },
+                        error: function () {
+                            alert('Có lỗi xảy ra trong quá trình xóa.');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+}

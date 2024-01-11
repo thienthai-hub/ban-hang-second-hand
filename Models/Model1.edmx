@@ -1,0 +1,772 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WebBangHangDemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_Adv">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="250" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+          <Property Name="Type" Type="int" />
+          <Property Name="Link" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="150" />
+          <Property Name="ModifierDate" Type="datetime" />
+          <Property Name="ModifierBy" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="tb_Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="150" />
+          <Property Name="Description" Type="nvarchar" MaxLength="550" />
+          <Property Name="Alias" Type="nvarchar" MaxLength="500" />
+          <Property Name="Position" Type="int" />
+          <Property Name="SeoTitle" Type="nvarchar" MaxLength="400" />
+          <Property Name="SeoDescription" Type="nchar" MaxLength="500" />
+          <Property Name="SeoKey" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="150" />
+          <Property Name="ModifierDate" Type="datetime" />
+          <Property Name="ModifierBy" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="550" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Website" Type="nvarchar" MaxLength="530" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="IsRead" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="150" />
+          <Property Name="ModifierDate" Type="datetime" />
+          <Property Name="ModifierBy" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="tb_New">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="550" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Alias" Type="nvarchar" MaxLength="500" />
+          <Property Name="Detail" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="SeoTitle" Type="nvarchar" MaxLength="400" />
+          <Property Name="SeoDescription" Type="nchar" MaxLength="500" />
+          <Property Name="SeoKey" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="150" />
+          <Property Name="ModifierDate" Type="datetime" />
+          <Property Name="ModifierBy" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="150" />
+          <Property Name="CustomeName" Type="nvarchar" MaxLength="150" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="550" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="150" />
+          <Property Name="ModifierDate" Type="datetime" />
+          <Property Name="ModifierBy" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="tb_OrederDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="450" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="550" />
+          <Property Name="Alias" Type="nvarchar" MaxLength="500" />
+          <Property Name="Detail" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar" MaxLength="510" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="SeoTitle" Type="nvarchar" MaxLength="400" />
+          <Property Name="SeoDescription" Type="nchar" MaxLength="500" />
+          <Property Name="SeoKey" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="150" />
+          <Property Name="ModifierDate" Type="datetime" />
+          <Property Name="ModifierBy" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="520" />
+          <Property Name="ProductCategoryID" Type="int" />
+          <Property Name="Alias" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar" MaxLength="550" />
+          <Property Name="Detail" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar" MaxLength="550" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PriceSale" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="SeoTitle" Type="nvarchar" MaxLength="400" />
+          <Property Name="SeoDescription" Type="nchar" MaxLength="500" />
+          <Property Name="SeoKey" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="150" />
+          <Property Name="ModifierDate" Type="datetime" />
+          <Property Name="ModifierBy" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ProductCode" Type="nvarchar" MaxLength="110" />
+          <Property Name="IsHome" Type="bit" Nullable="false" />
+          <Property Name="IsFeature" Type="bit" Nullable="false" />
+          <Property Name="IsSale" Type="bit" Nullable="false" />
+          <Property Name="Images" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_ProductCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="250" />
+          <Property Name="Description" Type="nvarchar" MaxLength="550" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="150" />
+          <Property Name="ModifierDate" Type="datetime" />
+          <Property Name="ModifierBy" Type="nvarchar" MaxLength="150" />
+          <Property Name="Alias" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tb_Subscribe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="150" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tb_SystemSetting">
+          <Key>
+            <PropertyRef Name="SettingKey" />
+          </Key>
+          <Property Name="SettingKey" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SettingValue" Type="nvarchar(max)" />
+          <Property Name="SettingDescription" Type="nvarchar" MaxLength="550" />
+        </EntityType>
+        <Association Name="FK_tb_New_tb_Category">
+          <End Role="tb_Category" Type="Self.tb_Category" Multiplicity="0..1" />
+          <End Role="tb_New" Type="Self.tb_New" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tb_New">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_OrederDetail_tb_Order">
+          <End Role="tb_Order" Type="Self.tb_Order" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tb_OrederDetail" Type="Self.tb_OrederDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tb_OrederDetail">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_OrederDetail_tb_Product">
+          <End Role="tb_Product" Type="Self.tb_Product" Multiplicity="0..1" />
+          <End Role="tb_OrederDetail" Type="Self.tb_OrederDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tb_OrederDetail">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Post_tb_Category">
+          <End Role="tb_Category" Type="Self.tb_Category" Multiplicity="0..1" />
+          <End Role="tb_Post" Type="Self.tb_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tb_Post">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Product_tb_ProductCategory">
+          <End Role="tb_ProductCategory" Type="Self.tb_ProductCategory" Multiplicity="0..1" />
+          <End Role="tb_Product" Type="Self.tb_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_ProductCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tb_Product">
+              <PropertyRef Name="ProductCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebBangHangDemoModelStoreContainer">
+          <EntitySet Name="tb_Adv" EntityType="Self.tb_Adv" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Category" EntityType="Self.tb_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Contact" EntityType="Self.tb_Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_New" EntityType="Self.tb_New" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Order" EntityType="Self.tb_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_OrederDetail" EntityType="Self.tb_OrederDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Post" EntityType="Self.tb_Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Product" EntityType="Self.tb_Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_ProductCategory" EntityType="Self.tb_ProductCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Subscribe" EntityType="Self.tb_Subscribe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_SystemSetting" EntityType="Self.tb_SystemSetting" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tb_New_tb_Category" Association="Self.FK_tb_New_tb_Category">
+            <End Role="tb_Category" EntitySet="tb_Category" />
+            <End Role="tb_New" EntitySet="tb_New" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_OrederDetail_tb_Order" Association="Self.FK_tb_OrederDetail_tb_Order">
+            <End Role="tb_Order" EntitySet="tb_Order" />
+            <End Role="tb_OrederDetail" EntitySet="tb_OrederDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_OrederDetail_tb_Product" Association="Self.FK_tb_OrederDetail_tb_Product">
+            <End Role="tb_Product" EntitySet="tb_Product" />
+            <End Role="tb_OrederDetail" EntitySet="tb_OrederDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Post_tb_Category" Association="Self.FK_tb_Post_tb_Category">
+            <End Role="tb_Category" EntitySet="tb_Category" />
+            <End Role="tb_Post" EntitySet="tb_Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Product_tb_ProductCategory" Association="Self.FK_tb_Product_tb_ProductCategory">
+            <End Role="tb_ProductCategory" EntitySet="tb_ProductCategory" />
+            <End Role="tb_Product" EntitySet="tb_Product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WebBangHangDemoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_Adv">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="Link" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifierBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tb_Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="Int32" />
+          <Property Name="SeoTitle" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="SeoDescription" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="SeoKey" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifierBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_New" Relationship="Self.FK_tb_New_tb_Category" FromRole="tb_Category" ToRole="tb_New" />
+          <NavigationProperty Name="tb_Post" Relationship="Self.FK_tb_Post_tb_Category" FromRole="tb_Category" ToRole="tb_Post" />
+          <Property Name="Alias" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          </EntityType>
+        <EntityType Name="tb_Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="530" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsRead" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifierBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tb_New">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="SeoTitle" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="SeoDescription" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="SeoKey" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifierBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_Category" Relationship="Self.FK_tb_New_tb_Category" FromRole="tb_New" ToRole="tb_Category" />
+          <Property Name="Alias" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CustomeName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifierBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_OrederDetail" Relationship="Self.FK_tb_OrederDetail_tb_Order" FromRole="tb_Order" ToRole="tb_OrederDetail" />
+        </EntityType>
+        <EntityType Name="tb_OrederDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="tb_Order" Relationship="Self.FK_tb_OrederDetail_tb_Order" FromRole="tb_OrederDetail" ToRole="tb_Order" />
+          <NavigationProperty Name="tb_Product" Relationship="WebBangHangDemoModel.FK_tb_OrederDetail_tb_Product" FromRole="tb_OrederDetail" ToRole="tb_Product" />
+        </EntityType>
+        <EntityType Name="tb_Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="510" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="SeoTitle" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="SeoDescription" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="SeoKey" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifierBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_Category" Relationship="Self.FK_tb_Post_tb_Category" FromRole="tb_Post" ToRole="tb_Category" />
+          <Property Name="Alias" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="520" FixedLength="false" Unicode="true" />
+          <Property Name="ProductCategoryID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PriceSale" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="SeoTitle" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="SeoDescription" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="SeoKey" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifierBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_ProductCategory" Relationship="Self.FK_tb_Product_tb_ProductCategory" FromRole="tb_Product" ToRole="tb_ProductCategory" />
+          <NavigationProperty Name="tb_OrederDetail" Relationship="WebBangHangDemoModel.FK_tb_OrederDetail_tb_Product" FromRole="tb_Product" ToRole="tb_OrederDetail" />
+          <Property Name="Alias" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ProductCode" Type="String" MaxLength="110" FixedLength="false" Unicode="true" />
+          <Property Name="IsHome" Type="Boolean" Nullable="false" />
+          <Property Name="IsFeature" Type="Boolean" Nullable="false" />
+          <Property Name="IsSale" Type="Boolean" Nullable="false" />
+          <Property Name="Images" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tb_ProductCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ModifierDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifierBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_Product" Relationship="Self.FK_tb_Product_tb_ProductCategory" FromRole="tb_ProductCategory" ToRole="tb_Product" />
+          <Property Name="Alias" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tb_Subscribe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tb_SystemSetting">
+          <Key>
+            <PropertyRef Name="SettingKey" />
+          </Key>
+          <Property Name="SettingKey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SettingValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SettingDescription" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_tb_New_tb_Category">
+          <End Role="tb_Category" Type="Self.tb_Category" Multiplicity="0..1" />
+          <End Role="tb_New" Type="Self.tb_New" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tb_New">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Post_tb_Category">
+          <End Role="tb_Category" Type="Self.tb_Category" Multiplicity="0..1" />
+          <End Role="tb_Post" Type="Self.tb_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tb_Post">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_OrederDetail_tb_Order">
+          <End Role="tb_Order" Type="Self.tb_Order" Multiplicity="0..1" />
+          <End Role="tb_OrederDetail" Type="Self.tb_OrederDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tb_OrederDetail">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Product_tb_ProductCategory">
+          <End Role="tb_ProductCategory" Type="Self.tb_ProductCategory" Multiplicity="0..1" />
+          <End Role="tb_Product" Type="Self.tb_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_ProductCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tb_Product">
+              <PropertyRef Name="ProductCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebBangHangDemoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_Adv" EntityType="Self.tb_Adv" />
+          <EntitySet Name="tb_Category" EntityType="Self.tb_Category" />
+          <EntitySet Name="tb_Contact" EntityType="Self.tb_Contact" />
+          <EntitySet Name="tb_New" EntityType="Self.tb_New" />
+          <EntitySet Name="tb_Order" EntityType="Self.tb_Order" />
+          <EntitySet Name="tb_OrederDetail" EntityType="Self.tb_OrederDetail" />
+          <EntitySet Name="tb_Post" EntityType="Self.tb_Post" />
+          <EntitySet Name="tb_Product" EntityType="Self.tb_Product" />
+          <EntitySet Name="tb_ProductCategory" EntityType="Self.tb_ProductCategory" />
+          <EntitySet Name="tb_Subscribe" EntityType="Self.tb_Subscribe" />
+          <EntitySet Name="tb_SystemSetting" EntityType="Self.tb_SystemSetting" />
+          <AssociationSet Name="FK_tb_New_tb_Category" Association="Self.FK_tb_New_tb_Category">
+            <End Role="tb_Category" EntitySet="tb_Category" />
+            <End Role="tb_New" EntitySet="tb_New" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Post_tb_Category" Association="Self.FK_tb_Post_tb_Category">
+            <End Role="tb_Category" EntitySet="tb_Category" />
+            <End Role="tb_Post" EntitySet="tb_Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_OrederDetail_tb_Order" Association="Self.FK_tb_OrederDetail_tb_Order">
+            <End Role="tb_Order" EntitySet="tb_Order" />
+            <End Role="tb_OrederDetail" EntitySet="tb_OrederDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Product_tb_ProductCategory" Association="Self.FK_tb_Product_tb_ProductCategory">
+            <End Role="tb_ProductCategory" EntitySet="tb_ProductCategory" />
+            <End Role="tb_Product" EntitySet="tb_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_OrederDetail_tb_Product" Association="WebBangHangDemoModel.FK_tb_OrederDetail_tb_Product">
+            <End Role="tb_Product" EntitySet="tb_Product" />
+            <End Role="tb_OrederDetail" EntitySet="tb_OrederDetail" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_tb_OrederDetail_tb_Product">
+          <End Type="WebBangHangDemoModel.tb_Product" Role="tb_Product" Multiplicity="0..1" />
+          <End Type="WebBangHangDemoModel.tb_OrederDetail" Role="tb_OrederDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tb_OrederDetail">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WebBangHangDemoModelStoreContainer" CdmEntityContainer="WebBangHangDemoEntities">
+          <EntitySetMapping Name="tb_Adv">
+            <EntityTypeMapping TypeName="WebBangHangDemoModel.tb_Adv">
+              <MappingFragment StoreEntitySet="tb_Adv">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifierDate" ColumnName="ModifierDate" />
+                <ScalarProperty Name="ModifierBy" ColumnName="ModifierBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Category">
+            <EntityTypeMapping TypeName="WebBangHangDemoModel.tb_Category">
+              <MappingFragment StoreEntitySet="tb_Category">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="SeoTitle" ColumnName="SeoTitle" />
+                <ScalarProperty Name="SeoDescription" ColumnName="SeoDescription" />
+                <ScalarProperty Name="SeoKey" ColumnName="SeoKey" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifierDate" ColumnName="ModifierDate" />
+                <ScalarProperty Name="ModifierBy" ColumnName="ModifierBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Contact">
+            <EntityTypeMapping TypeName="WebBangHangDemoModel.tb_Contact">
+              <MappingFragment StoreEntitySet="tb_Contact">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifierDate" ColumnName="ModifierDate" />
+                <ScalarProperty Name="ModifierBy" ColumnName="ModifierBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_New">
+            <EntityTypeMapping TypeName="WebBangHangDemoModel.tb_New">
+              <MappingFragment StoreEntitySet="tb_New">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="SeoTitle" ColumnName="SeoTitle" />
+                <ScalarProperty Name="SeoDescription" ColumnName="SeoDescription" />
+                <ScalarProperty Name="SeoKey" ColumnName="SeoKey" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifierDate" ColumnName="ModifierDate" />
+                <ScalarProperty Name="ModifierBy" ColumnName="ModifierBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Order">
+            <EntityTypeMapping TypeName="WebBangHangDemoModel.tb_Order">
+              <MappingFragment StoreEntitySet="tb_Order">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CustomeName" ColumnName="CustomeName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifierDate" ColumnName="ModifierDate" />
+                <ScalarProperty Name="ModifierBy" ColumnName="ModifierBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_OrederDetail">
+            <EntityTypeMapping TypeName="WebBangHangDemoModel.tb_OrederDetail">
+              <MappingFragment StoreEntitySet="tb_OrederDetail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Post">
+            <EntityTypeMapping TypeName="WebBangHangDemoModel.tb_Post">
+              <MappingFragment StoreEntitySet="tb_Post">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="SeoTitle" ColumnName="SeoTitle" />
+                <ScalarProperty Name="SeoDescription" ColumnName="SeoDescription" />
+                <ScalarProperty Name="SeoKey" ColumnName="SeoKey" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifierDate" ColumnName="ModifierDate" />
+                <ScalarProperty Name="ModifierBy" ColumnName="ModifierBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Product">
+            <EntityTypeMapping TypeName="WebBangHangDemoModel.tb_Product">
+              <MappingFragment StoreEntitySet="tb_Product">
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="IsSale" ColumnName="IsSale" />
+                <ScalarProperty Name="IsFeature" ColumnName="IsFeature" />
+                <ScalarProperty Name="IsHome" ColumnName="IsHome" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PriceSale" ColumnName="PriceSale" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="SeoTitle" ColumnName="SeoTitle" />
+                <ScalarProperty Name="SeoDescription" ColumnName="SeoDescription" />
+                <ScalarProperty Name="SeoKey" ColumnName="SeoKey" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifierDate" ColumnName="ModifierDate" />
+                <ScalarProperty Name="ModifierBy" ColumnName="ModifierBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_ProductCategory">
+            <EntityTypeMapping TypeName="WebBangHangDemoModel.tb_ProductCategory">
+              <MappingFragment StoreEntitySet="tb_ProductCategory">
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifierDate" ColumnName="ModifierDate" />
+                <ScalarProperty Name="ModifierBy" ColumnName="ModifierBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Subscribe">
+            <EntityTypeMapping TypeName="WebBangHangDemoModel.tb_Subscribe">
+              <MappingFragment StoreEntitySet="tb_Subscribe">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_SystemSetting">
+            <EntityTypeMapping TypeName="WebBangHangDemoModel.tb_SystemSetting">
+              <MappingFragment StoreEntitySet="tb_SystemSetting">
+                <ScalarProperty Name="SettingKey" ColumnName="SettingKey" />
+                <ScalarProperty Name="SettingValue" ColumnName="SettingValue" />
+                <ScalarProperty Name="SettingDescription" ColumnName="SettingDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

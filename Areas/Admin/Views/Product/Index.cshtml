@@ -1,0 +1,338 @@
+﻿@model PagedList.IPagedList<BanHangOnline.Models.tb_Product>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Sản Phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
+    int pageSize = Model.PageSize;
+    int pageNumber = Model.PageNumber;
+    int count = ((pageNumber - 1) * pageSize) + 1; // Khởi tạo biến đếm dựa trên số trang và kích thước trang
+}
+@section navHeader {
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="~/admin/Home" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="~/admin/post" class="nav-link">Danh sách @ViewBag.Title</a>
+        </li>
+    </ul>
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý @ViewBag.Title</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Danh mục @ViewBag.Title</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="card-title mb-0">Danh sách @ViewBag.Title</h3> <!-- Thêm class mb-0 để loại bỏ margin dưới của h3 -->
+                <div>
+                    <form action="@Url.Action("Index")" method="get" class="form-inline">
+                        <input type="text" name="searchTerm" class="form-control mr-2" placeholder="Tìm kiếm..." />
+                        <button type="submit" class="btn btn-outline-primary">Tìm kiếm</button>
+                    </form>
+                </div>
+                <div class="card-tools">
+                    <a href="~/admin/product/add" class="btn btn-primary">Thêm mới @ViewBag.Title</a>
+                    <a href="#" class="btn btn-danger" id="deleteAllSelected">Delete All</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tiêu đề</th>
+                        <th>Danh mục</th>
+                        <th>Hình ảnh</th>
+                        <th>Giá</th>
+                        <th>SpMới-IH</th>
+                        <th>Best Seller-If</th>
+                        <th>Giam Giá-IS</th>
+                        <th>Hiển Thị</th>
+                        <th><input type="checkbox" id="DeleteAll" /></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+
+                        foreach (var item in Model)
+                        {
+                    <tr id="row_@item.Id">
+                        <td>@count</td> <!-- Hiển thị số thứ tự -->
+                        <td>@item.Title</td>
+                        <td>
+                            @if (item != null && item.tb_ProductCategory != null)
+                            {
+                                // Bây giờ bạn có thể an toàn truy cập item.tb_Category.Title
+                                var title = item.tb_ProductCategory.Title;
+                                @title
+                            }
+                            else
+                            {
+                                @:Không có trong danh mục nào
+                            }
+                        </td>
+                        <td><img src="@item.Image" width="50" /></td>
+                        <td>@item.Price</td>
+                        <td>
+                            <i class="fa @(item.IsHome ? "fa-check text-success" : "fa-times text-danger")" id="toggleIsHome" data-id="@item.Id" data-isactive="@item.IsHome"></i>
+                        </td>
+                        <td>
+                            <i class="fa @(item.IsFeature ? "fa-check text-success" : "fa-times text-danger")" id="toggleIsFeature" data-id="@item.Id" data-isactive="@item.IsFeature"></i>
+                        </td>
+                        <td>
+                            <i class="fa @(item.IsSale ? "fa-check text-success" : "fa-times text-danger")" id="toggleIsSale" data-id="@item.Id" data-isactive="@item.IsSale"></i>
+                        </td>
+                        <td>
+                            <i class="fa @(item.IsActive ? "fa-check text-success" : "fa-times text-danger")" id="toggleIsActive" data-id="@item.Id" data-isactive="@item.IsActive"></i>
+                        </td>
+                        <td><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
+
+                        <td>
+                            <a href="~/admin/product/edit/@item.Id" class="btn btn-primary">Sữa</a>
+                            <a href="#" data-id="@item.Id" class="btn btn-danger btnDelete">Xóa</a>
+                        </td>
+                    </tr>
+                            count++; // Tăng biến đếm
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8">Không có bản ghi nào</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+<script src="~/Content/Js/IsActive.js"></script>
+@section Scripts{
+    <!-- Đảm bảo bạn đã thêm thư viện jQuery vào trang HTML của mình -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        //delete Item
+        $(document).ready(function () {
+            $(".btnDelete").click(function (e) {
+                e.preventDefault();
+
+                var id = $(this).data("id");
+                var rowId = "#row_" + id;
+                var url = '/admin/product/Delete/' + id;
+
+                if (confirm("Bạn có chắc muốn xóa không?")) {
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        success: function (response) {
+                            if (response.success) {
+                                $(rowId).remove(); // Xóa dòng khỏi giao diện
+                            } else {
+                                alert(response.message); // Hiển thị thông báo lỗi
+                            }
+                        },
+                        error: function () {
+                            alert("Có lỗi xảy ra trong quá trình xóa");
+                        }
+                    });
+                }
+            });
+        });
+
+        //IsActive
+        $(document).on('click', '#toggleIsActive', function () {
+            var iconElement = $(this);
+            var itemId = iconElement.data('id');
+            var isActive = iconElement.data('isactive');
+
+            $.ajax({
+                url: '@Url.Action("ToggleIsActiveProduct", "jsonIsActive")',
+                type: 'POST',
+                data: { id: itemId },
+                success: function (response) {
+                    if (response.success) {
+                        if (response.isActive) {
+                            iconElement.removeClass('fa-times text-danger').addClass('fa-check text-success');
+                        } else {
+                            iconElement.removeClass('fa-check text-success').addClass('fa-times text-danger');
+                        }
+                        iconElement.data('isactive', response.isActive);
+                    } else {
+                        // Xử lý trường hợp lỗi
+                    }
+                },
+                error: function (error) {
+                    // Xử lý lỗi
+                }
+            });
+        });
+        //ISHome
+        $(document).on('click', '#toggleIsHome', function () {
+            var iconElement = $(this);
+            var itemId = iconElement.data('id');
+            var isActive = iconElement.data('isactive');
+
+            $.ajax({
+                url: '@Url.Action("ToggleIsHomeProduct", "jsonIsActive")',
+                type: 'POST',
+                data: { id: itemId },
+                success: function (response) {
+                    if (response.success) {
+                        if (response.isActive) {
+                            iconElement.removeClass('fa-times text-danger').addClass('fa-check text-success');
+                        } else {
+                            iconElement.removeClass('fa-check text-success').addClass('fa-times text-danger');
+                        }
+                        iconElement.data('isactive', response.isActive);
+                    } else {
+                        // Xử lý trường hợp lỗi
+                    }
+                },
+                error: function (error) {
+                    // Xử lý lỗi
+                }
+            });
+        });
+
+        //IsSale
+        $(document).on('click', '#toggleIsSale', function () {
+            var iconElement = $(this);
+            var itemId = iconElement.data('id');
+            var isActive = iconElement.data('isactive');
+
+            $.ajax({
+                url: '@Url.Action("ToggleIsSaleProduct", "jsonIsActive")',
+                type: 'POST',
+                data: { id: itemId },
+                success: function (response) {
+                    if (response.success) {
+                        if (response.isActive) {
+                            iconElement.removeClass('fa-times text-danger').addClass('fa-check text-success');
+                        } else {
+                            iconElement.removeClass('fa-check text-success').addClass('fa-times text-danger');
+                        }
+                        iconElement.data('isactive', response.isActive);
+                    } else {
+                        // Xử lý trường hợp lỗi
+                    }
+                },
+                error: function (error) {
+                    // Xử lý lỗi
+                }
+            });
+        });
+
+        //IsFeature
+        $(document).on('click', '#toggleIsFeature', function () {
+            var iconElement = $(this);
+            var itemId = iconElement.data('id');
+            var isActive = iconElement.data('isactive');
+
+            $.ajax({
+                url: '@Url.Action("ToggleIsFeatureProduct", "jsonIsActive")',
+                type: 'POST',
+                data: { id: itemId },
+                success: function (response) {
+                    if (response.success) {
+                        if (response.isActive) {
+                            iconElement.removeClass('fa-times text-danger').addClass('fa-check text-success');
+                        } else {
+                            iconElement.removeClass('fa-check text-success').addClass('fa-times text-danger');
+                        }
+                        iconElement.data('isactive', response.isActive);
+                    } else {
+                        // Xử lý trường hợp lỗi
+                    }
+                },
+                error: function (error) {
+                    // Xử lý lỗi
+                }
+            });
+        });
+
+        //detele All
+        $(document).ready(function () {
+            $('#DeleteAll').click(function () {
+                var isChecked = $(this).is(':checked');
+                $('.cbkItem').prop('checked', isChecked);
+            });
+        });
+
+        $(document).ready(function(){
+        $('#deleteAllSelected').click(function(event){
+            event.preventDefault();
+            var selectedIds = $('.cbkItem:checked').map(function(){
+                return $(this).val();
+            }).get();
+
+            if(selectedIds.length === 0){
+                alert('Vui lòng chọn ít nhất một mục để xóa.');
+                return;
+            }
+
+            var isConfirmed = confirm('Bạn có chắc muốn xóa không?');
+            if(isConfirmed){
+                // Gửi yêu cầu xóa tới server
+                // Cách thực hiện phụ thuộc vào cách backend của bạn được cấu hình
+                // Ví dụ: sử dụng AJAX để gửi yêu cầu xóa
+                $.ajax({
+                    url: '/product/DeleteSelectedItems', // Thay đổi URL theo đường dẫn thực tế
+                    type: 'POST',
+                    data: JSON.stringify({ ids: selectedIds }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success) {
+                            // Xóa các dòng đã chọn từ giao diện
+                            $('.cbkItem:checked').closest('tr').remove();
+
+                            alert(response.message);
+                        } else {
+                            alert(response.message); // Hiển thị thông báo lỗi
+                        }
+                    },
+                    error: function () {
+                        alert('Có lỗi xảy ra trong quá trình xóa.');
+                    }
+                });
+            }
+        });
+    });
+
+    </script>
+
+}
+
